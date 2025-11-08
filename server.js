@@ -1,3 +1,5 @@
+// server.js
+
 const express = require('express');
 const axios = require('axios');
 const { JSDOM } = require('jsdom');
@@ -120,8 +122,9 @@ async function summarizeWithGemini(textToSummarize, query, geminiKey, modelName,
 // --- Express App ---
 const app = express();
 app.use(express.json());
-app.use(express.static('public')); // Serve frontend files
+app.use(express.static('public')); // Serve frontend files from the 'public' directory
 
+// API endpoint for search and summarize
 app.post('/api/search', async (req, res) => {
     const { 
         query, serper_api_key, search_type, num_results, 
@@ -150,6 +153,7 @@ app.post('/api/search', async (req, res) => {
     res.json({ result: scrapedText });
 });
 
+// API endpoint for analytics
 app.get('/api/analytics', async (req, res) => {
     try {
         const [requestsData, avgTimeData] = await Promise.all([
@@ -161,7 +165,6 @@ app.get('/api/analytics', async (req, res) => {
         res.status(500).json({ error: "Failed to fetch analytics data." });
     }
 });
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
