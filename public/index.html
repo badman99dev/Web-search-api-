@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Search & Summarize UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 AI Search & Summarize</h1>
+        <div class="tabs">
+            <button class="tab-link active" onclick="openTab(event, 'App')">App</button>
+            <button class="tab-link" onclick="openTab(event, 'Analytics')">Analytics</button>
+        </div>
+
+        <div id="App" class="tab-content" style="display: block;">
+            <form id="search-form">
+                <h3>Step 1: Web Search</h3>
+                <label for="query">Search Query</label>
+                <input type="text" id="query" name="query" required>
+
+                <label for="serper_api_key">Your Serper API Key</label>
+                <input type="password" id="serper_api_key" name="serper_api_key" required>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Search Type</label>
+                        <div class="radio-group">
+                            <input type="radio" id="st_search" name="search_type" value="search" checked>
+                            <label for="st_search">Search</label>
+                            <input type="radio" id="st_news" name="search_type" value="news">
+                            <label for="st_news">News</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                         <label for="num_results">Number of Results: <span id="num-results-value">4</span></label>
+                         <input type="range" id="num_results" name="num_results" min="1" max="20" value="4">
+                    </div>
+                </div>
+
+                <h3>Step 2: AI Summarization</h3>
+                <label>Research Mode</label>
+                 <div class="radio-group">
+                    <input type="radio" id="rm_normal" name="research_mode" value="normal" checked>
+                    <label for="rm_normal">Normal (Fast Summary)</label>
+                    <input type="radio" id="rm_deep" name="research_mode" value="deep">
+                    <label for="rm_deep">Deep (Detailed Report)</label>
+                </div>
+
+                <label for="gemini_api_key">Your Gemini API Key</label>
+                <input type="password" id="gemini_api_key" name="gemini_api_key" placeholder="Leave empty to skip summarization">
+
+                <label for="gemini_model">Gemini Model</label>
+                <input type="text" id="gemini_model" name="gemini_model" value="gemini-1.5-flash-latest">
+
+                <button type="submit" id="submit-button">Search & Summarize</button>
+            </form>
+             <div class="output-container">
+                <label for="output">Result</label>
+                <textarea id="output" rows="20" readonly></textarea>
+            </div>
+        </div>
+
+        <div id="Analytics" class="tab-content">
+            <div class="chart-container">
+                <canvas id="requestsChart"></canvas>
+            </div>
+             <div class="chart-container">
+                <canvas id="avgTimeChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
